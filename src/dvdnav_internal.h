@@ -57,7 +57,7 @@ static inline int _private_gettimeofday( struct timeval *tv, void *tz )
 
 #include <pthread.h>
 
-#endif /* WIN32 */
+#endif /* _WIN32 */
 
 #ifdef __ANDROID__
 # undef  lseek
