@@ -78,6 +78,18 @@ typedef enum {
   DVD_AUDIO_FORMAT_SDDS       = 7
 } DVDAudioFormat_t;
 
+/*
+ * Button groups to identify the correct highlight areas
+ * (see dvdnav_get_highlight_area_from_group())
+ */
+typedef enum {
+    DVD_BTN_GRP_Normal    = 0x00,
+    DVD_BTN_GRP_Wide      = 0x01,
+    DVD_BTN_GRP_Letterbox = 0x02,
+    DVD_BTN_GRP_PanScan   = 0x04
+} DVDBtnGrp_t;
+
+
 /* the following types are currently unused */
 
 #if 0
