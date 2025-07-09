@@ -425,11 +425,15 @@ int64_t dvdnav_get_current_time(dvdnav_t *self);
  * Stop playing the current position and start playback of the title
  * from the specified timecode.
  *
- * Currently implemented using interpolation. That interpolation is slightly
- * inaccurate.
+ * if search_to_nearest_cell is set then search to the nearest Cell.
+ * and then use dvdnav_relative_time_search for further seeking
+ * Otherwise tries to guess the nearest VOBU by calculating an offset.
  */
-dvdnav_status_t dvdnav_time_search(dvdnav_t *self,
-                                   uint64_t time);
+dvdnav_status_t dvdnav_absolute_time_search(dvdnav_t *self,
+                                   uint64_t time, uint8_t search_to_nearest_cell);
+
+int dvdnav_relative_time_search(dvdnav_t *self,
+                   int relative_time);
 
 /*
  * Find the nearest vobu and jump to it
