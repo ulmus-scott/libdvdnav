@@ -323,6 +323,10 @@ int vm_get_video_scale_permission(vm_t *vm) {
   return vm_get_video_attr(vm).permitted_df;
 }
 
+int vm_get_video_format(vm_t *vm) {
+  return vm_get_video_attr(vm).video_format;
+}
+
 video_attr_t vm_get_video_attr(vm_t *vm) {
   switch ((vm->state).domain) {
   case DVD_DOMAIN_VTSTitle:

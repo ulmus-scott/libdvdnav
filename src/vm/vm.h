@@ -160,6 +160,7 @@ void vm_get_subp_info(vm_t *vm, int *current, int *num_avail);
 void vm_get_video_res(vm_t *vm, int *width, int *height);
 int  vm_get_video_aspect(vm_t *vm);
 int  vm_get_video_scale_permission(vm_t *vm);
+int  vm_get_video_format(vm_t *vm);
 video_attr_t vm_get_video_attr(vm_t *vm);
 audio_attr_t vm_get_audio_attr(vm_t *vm, int streamN);
 subp_attr_t  vm_get_subp_attr(vm_t *vm, int streamN);
