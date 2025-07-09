@@ -25,7 +25,7 @@
 #include "config.h"
 #endif
 
-#ifdef WIN32
+#ifdef _WIN32
 
 /* pthread_mutex_* wrapper for win32 */
 #include <windows.h>
@@ -36,7 +36,7 @@ typedef CRITICAL_SECTION pthread_mutex_t;
 #define pthread_mutex_unlock(a)  LeaveCriticalSection(a)
 #define pthread_mutex_destroy(a) DeleteCriticalSection(a)
 
-#ifndef HAVE_GETTIMEOFDAY
+#if HAVE_GETTIMEOFDAY == 0
 /* replacement gettimeofday implementation */
 #include <sys/timeb.h>
 static inline int _private_gettimeofday( struct timeval *tv, void *tz )
@@ -93,7 +93,7 @@ typedef struct read_cache_s read_cache_t;
 
 #ifndef audio_status_t
 typedef struct {
-#ifdef WORDS_BIGENDIAN
+#if HAVE_BIGENDIAN
   unsigned int available     : 1;
   unsigned int zero1         : 4;
   unsigned int stream_number : 3;
@@ -109,7 +109,7 @@ typedef struct {
 
 #ifndef spu_status_t
 typedef struct {
-#ifdef WORDS_BIGENDIAN
+#if HAVE_BIGENDIAN
   unsigned int available               : 1;
   unsigned int zero1                   : 2;
   unsigned int stream_number_4_3       : 5;
