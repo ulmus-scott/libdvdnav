@@ -62,6 +62,8 @@
 #include <fcntl.h>  /* O_BINARY  */
 #endif
 
+#include "libmythtv/io/mythiowrapper.h"
+
 #if DVDREAD_VERSION >= DVDREAD_VERSION_CODE(6,1,0)
 static void dvd_reader_logger_handler( void *priv, dvd_logger_level_t level,
                                        const char *fmt, va_list list )
@@ -205,12 +207,12 @@ static int dvd_read_name(const vm_t *vm, char *name, char *serial, const char *d
     Log0(vm, "Device name string NULL");
     goto fail;
   }
-  if ((fd = open(device, O_RDONLY)) == -1) {
+  if ((fd = MythFileOpen(device, O_RDONLY)) == -1) {
     Log0(vm, "Unable to open device file %s.", device);
     goto fail;
   }
 
-  if ((off = lseek( fd, 32 * (off_t) DVD_VIDEO_LB_LEN, SEEK_SET )) == (off_t) - 1) {
+  if ((off = MythFileSeek( fd, 32 * (off_t) DVD_VIDEO_LB_LEN, SEEK_SET )) == (off_t) - 1) {
     Log0(vm, "Unable to seek to the title block %u.", 32);
     goto fail;
   }
@@ -220,12 +222,12 @@ static int dvd_read_name(const vm_t *vm, char *name, char *serial, const char *d
     goto fail;
   }
 
-  if ((read_size = read( fd, data, DVD_VIDEO_LB_LEN )) == -1) {
+  if ((read_size = MythFileRead( fd, data, DVD_VIDEO_LB_LEN )) == -1) {
     Log0(vm, "Can't read name block. Probably not a DVD-ROM device.");
     goto fail;
   }
 
-  close(fd);
+  MythfileClose(fd);
   fd = -1;
   if (read_size != DVD_VIDEO_LB_LEN) {
     Log0(vm, "Can't read name block. Probably not a DVD-ROM device.");
@@ -250,7 +252,7 @@ static int dvd_read_name(const vm_t *vm, char *name, char *serial, const char *d
 
 fail:
   if (fd >= 0)
-    close(fd);
+    MythfileClose(fd);
 
   return 0;
 }
