@@ -193,7 +193,7 @@ link_t play_Cell(vm_t *vm) {
   /* Multi angle/Interleaved */
   switch((vm->state).pgc->cell_playback[(vm->state).cellN - 1].block_mode) {
   case 0: /*  Normal */
-    assert((vm->state).pgc->cell_playback[(vm->state).cellN - 1].block_type == 0);
+    /* MythTV assert((vm->state).pgc->cell_playback[(vm->state).cellN - 1].block_type == 0); */
     break;
   case 1: /*  The first cell in the block */
     switch((vm->state).pgc->cell_playback[(vm->state).cellN - 1].block_type) {
@@ -285,7 +285,7 @@ link_t play_Cell_post(vm_t *vm) {
   /* Multi angle/Interleaved */
   switch((vm->state).pgc->cell_playback[(vm->state).cellN - 1].block_mode) {
   case 0: /*  Normal */
-    assert((vm->state).pgc->cell_playback[(vm->state).cellN - 1].block_type == 0);
+    /* MythTV assert((vm->state).pgc->cell_playback[(vm->state).cellN - 1].block_type == 0); */
     (vm->state).cellN++;
     break;
   case 1: /*  The first cell in the block */
