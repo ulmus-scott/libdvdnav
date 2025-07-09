@@ -649,6 +649,12 @@ dvdnav_status_t dvdnav_get_video_resolution(dvdnav_t *self, uint32_t *width, uin
 uint8_t dvdnav_get_video_scale_permission(dvdnav_t *self);
 
 /*
+* Get video format
+* 0 - NTSC , 1 - PAL
+*/
+uint8_t dvdnav_get_video_format(dvdnav_t *self);
+
+/*
  * Converts a *logical* audio stream id into language code
  * (returns 0xffff if no such stream).
  */

@@ -1023,6 +1023,25 @@ uint8_t dvdnav_get_video_scale_permission(dvdnav_t *this) {
   return retval;
 }
 
+uint8_t dvdnav_get_video_format(dvdnav_t *this) {
+  uint8_t         retval;
+
+  if(!this) {
+    printerr("Passed a NULL pointer.");
+    return -1;
+  }
+  if(!this->started) {
+   printerr("Virtual DVD machine not started.");
+   return -1;
+  }
+
+  pthread_mutex_lock(&this->vm_lock);
+  retval = (uint8_t)vm_get_video_format(this->vm);
+  pthread_mutex_unlock(&this->vm_lock);
+
+  return retval;
+}
+
 uint16_t dvdnav_audio_stream_to_lang(dvdnav_t *this, uint8_t stream) {
   audio_attr_t  attr;
 
