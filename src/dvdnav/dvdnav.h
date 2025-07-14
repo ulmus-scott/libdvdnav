@@ -26,9 +26,6 @@
 #ifndef LIBDVDNAV_DVDNAV_H
 #define LIBDVDNAV_DVDNAV_H
 
-#define DVDNAV_VERSION "6.0.0"
-#define DVDNAV_VERSION_GIT "dcb9109e45ccd304ec82a7c7bf46cca63620adf9"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
