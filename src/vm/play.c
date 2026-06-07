@@ -211,6 +211,11 @@ link_t play_Cell(vm_t *vm) {
     return play_PGC_post(vm);
   }
 
+  if ((vm->state).pgc->cell_playback == NULL) {
+    /* Invalid PGC: cell_playback is missing */
+    return play_PGC_post(vm);
+  }
+
   /* Multi angle/Interleaved */
   switch((vm->state).pgc->cell_playback[(vm->state).cellN - 1].block_mode) {
   case 0: /*  Normal */
@@ -273,6 +278,11 @@ link_t play_Cell_post(vm_t *vm) {
 #ifdef TRACE
   Log3(vm, "play_Cell_post: (vm->state).cellN (%i)", (vm->state).cellN);
 #endif
+
+  if ((vm->state).pgc->cell_playback == NULL) {
+    /* Invalid PGC: cell_playback is missing */
+    return play_PGC_post(vm);
+  }
 
   cell = &(vm->state).pgc->cell_playback[(vm->state).cellN - 1];
 
