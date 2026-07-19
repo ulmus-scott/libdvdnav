@@ -1045,7 +1045,8 @@ static int32_t dvdnav_cell_find(dvdnav_t *this, dvd_state_t *state,
     /* 90 pts to ms */
     cell_data->end->time += (dvdnav_convert_time(&cell->playback_time) / 90);
     if (  find_val >= cell_data->bgn->time
-       && find_val <= cell_data->end->time) {
+       && (  find_val < cell_data->end->time
+          || (cell_idx == cells_end && find_val == cell_data->end->time))) {
       found = 1;
       break;
     }
@@ -1283,8 +1284,8 @@ static int32_t dvdnav_find_vobu_by_cell_boundaries(dvdnav_t *this,
     return 0;
   }
   cell_len = cell_data->end->time - cell_data->bgn->time;
-  if (cell_len < 0) {
-    Log1(this, "cell_len < 0");
+  if (cell_len <= 0) {
+    Log1(this, "cell_len <= 0");
     return 0;
   }
   jump_pct = (jump_offset * 1000) / cell_len;
